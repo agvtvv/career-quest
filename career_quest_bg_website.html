@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Quest — Твоята мечтана кариера</title>
+  <meta name="description" content="Career Quest помага на младежи да открият правилната специалност и университет чрез персонализирани тестове, класации и професионални консултации." />
+  <style>
+    :root{--accent:#ff7b6f;--accent2:#ffd27f;--bg:#fff8f3;--muted:#6b6b6b;--card:#ffffff}
+    *{box-sizing:border-box}
+    body{font-family:Inter, sans-serif;margin:0;background:var(--bg);color:#111}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-size:15px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;margin-top:28px}
+    .hero h1{font-size:34px;margin:0 0 12px}
+    .hero p{color:var(--muted);margin:0 0 20px;font-size:17px}
+    .cta{display:flex;gap:12px}
+    .btn{padding:12px 18px;border-radius:10px;border:0;cursor:pointer;font-size:15px}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-ghost{background:transparent;border:1px solid #e6e9ef;color:var(--accent)}
+    .card{background:var(--card);border-radius:14px;padding:22px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .price{font-weight:700;font-size:22px;color:var(--accent)}
+    section{margin-top:36px}
+    footer{margin-top:44px;padding:28px 0;color:var(--muted);font-size:14px;text-align:center}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">CQ</div>
+        <div>
+          <div style="font-weight:700;font-size:20px">Career Quest</div>
+          <div style="font-size:13px;color:var(--muted)">Открий своя път. Кандидатствай уверено.</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#how">Как работи</a>
+        <a href="#packages">Пакети</a>
+        <a href="#team">Екип</a>
+        <a href="#contact">Контакт</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Моята мечтана кариера — персонални насоки за твоя академичен път</h1>
+          <p>Career Quest ти помага да откриеш правилната специалност и университет чрез психологически тестове, анализ на интереси, класации и професионална подкрепа.</p>
+          <div class="cta">
+            <button class="btn btn-primary">Започни безплатен тест</button>
+            <button class="btn btn-ghost">Виж пакетите</button>
+          </div>
+
+          <section id="how">
+            <h2>Как работи Career Quest</h2>
+            <p style="color:var(--muted)">Комбинираме психологически тестове, анализи и реални данни, за да ти предложим най-точната специалност и университет.</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+              <div class="card">
+                <strong>1. Попълваш тестовете</strong>
+                <div style="color:var(--muted);font-size:14px;margin-top:8px">Кратки и научно обосновани тестове за личност, интереси и силни страни.</div>
+              </div>
+              <div class="card">
+                <strong>2. Получаваш персонален анализ</strong>
+                <div style="color:var(--muted);font-size:14px;margin-top:8px">Препоръки за професии, специалности и университети, които отговарят на твоя профил.</div>
+              </div>
+              <div class="card">
+                <strong>3. Кандидатстваш уверено</strong>
+                <div style="color:var(--muted);font-size:14px;margin-top:8px">Подготовка на CV, мотивационно писмо и тренировка за интервю.</div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="card" id="packages">
+          <h3>Пакети</h3>
+          <div style="margin-top:10px">
+            <div class="package">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <strong>Starter</strong>
+                  <div style="font-size:13px;color:var(--muted)">Фокус: самооценка и ориентация</div>
+                </div>
+                <div class="price">59.99 лв</div>
+              </div>
+              <ul style="color:var(--muted)">
+                <li>Кой съм аз</li>
+                <li>Какво искам — какво мога</li>
+                <li>Нещата, които обичам да правя</li>
+                <li>Моята идеална работа</li>
+                <li>Индивидуална информационна карта</li>
+              </ul>
+            </div>
+            <hr />
+            <div class="package">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <strong>Advanced</strong>
+                  <div style="font-size:13px;color:var(--muted)">Фокус: умения и приоритети</div>
+                </div>
+                <div class="price">199.99 лв</div>
+              </div>
+              <ul style="color:var(--muted)">
+                <li>Всички тестове от Starter +</li>
+                <li>Подреждане на качествата на работа</li>
+                <li>Диагностика на интереси към професии</li>
+                <li>Оценка на работна среда и организация</li>
+                <li>Кариера — способности за развитие</li>
+                <li>Ученическо портфолио</li>
+              </ul>
+            </div>
+            <hr />
+            <div class="package">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <strong>Master</strong>
+                  <div style="font-size:13px;color:var(--muted)">Фокус: кандидатстване и персонална подкрепа</div>
+                </div>
+                <div class="price">289.99 лв</div>
+              </div>
+              <ul style="color:var(--muted)">
+                <li>Всички тестове от Advanced +</li>
+                <li>Междуличностна среща</li>
+                <li>Вашите значими постижения</li>
+                <li>Подготовка на CV и мотивационно писмо</li>
+                <li>Подготовка за интервю</li>
+                <li>Среща със студент по избрана специалност</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="card" id="about">
+        <h2>За Career Quest</h2>
+        <p style="color:var(--muted)">Ние вярваме, че изборът на професия или университет е началото на твоето бъдеще. Нашият екип от професионални консултанти и психолози изучава интересите и успехите на младежи по целия свят и ги комбинира с психологически тестове, за да ти даде най-точната препоръка.</p>
+      </section>
+
+      <section id="team">
+        <h2>Екип</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+          <div class="card"><strong>Д-р Елена Петрова</strong><div style="color:var(--muted);font-size:13px">Кариерен психолог — 10+ години опит</div></div>
+          <div class="card"><strong>Иван Димитров</strong><div style="color:var(--muted);font-size:13px">Консултант по кандидатстване</div></div>
+          <div class="card"><strong>Мария Георгиева</strong><div style="color:var(--muted);font-size:13px">Образователен анализатор</div></div>
+        </div>
+      </section>
+
+      <section class="card" id="contact">
+        <h2>Свържи се с нас</h2>
+        <p style="color:var(--muted)">Готов ли си да откриеш своя път? Изпрати запитване или започни безплатно.</p>
+        <form style="display:grid;gap:8px;max-width:520px">
+          <input type="text" placeholder="Име и фамилия" style="padding:10px;border-radius:8px;border:1px solid #ddd" />
+          <input type="email" placeholder="Имейл" style="padding:10px;border-radius:8px;border:1px solid #ddd" />
+          <textarea placeholder="Разкажи ни за твоите цели" style="padding:10px;border-radius:8px;border:1px solid #ddd"></textarea>
+          <button class="btn btn-primary" type="submit">Изпрати</button>
+        </form>
+      </section>
+
+    </main>
+
+    <footer>© Career Quest — Всички права запазени</footer>
+  </div>
+</body>
+</html>
