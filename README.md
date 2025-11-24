@@ -4,7 +4,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Career Quest — Мечтана кариера</title>
   <style>
-    /* ===== Base ===== */
     :root{
       --bg:#f5f7fb; --card:#fff; --nav:#092a6b; --accent:#1ea3ff; --muted:#6b7082; --shadow:0 6px 18px rgba(11,24,48,0.08);
     }
@@ -13,7 +12,6 @@
     a{text-decoration:none;color:inherit;}
     .container{max-width:1100px;margin:0 auto;padding:16px;}
 
-    /* ===== Header ===== */
     header{display:flex;justify-content:space-between;align-items:center;padding:12px 0;}
     .brand{display:flex;align-items:center;gap:12px;}
     .brand .logo{width:44px;height:44px;background:linear-gradient(135deg,var(--nav),#1346b6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;border-radius:8px;}
@@ -22,33 +20,26 @@
     .hamburger{display:none;cursor:pointer;flex-direction:column;gap:4px;width:30px;height:24px;justify-content:center;}
     .hamburger span{display:block;height:3px;background:var(--nav);border-radius:2px;}
 
-    /* ===== Hero ===== */
     .hero{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:20px 0;}
     .hero-text{max-width:540px;}
     .hero-text h1{font-size:32px;margin:0 0 12px;}
     .hero-text p{color:var(--muted);margin:0 0 18px;}
     .hero-text button{padding:10px 18px;background:var(--accent);border:none;color:#042339;border-radius:8px;cursor:pointer;font-weight:600;}
 
-    /* ===== Sections ===== */
     section{margin:28px 0;}
     .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);}
     .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
     .cards-grid img{width:100%;border-radius:10px;}
-
-    /* ===== Team ===== */
     .team-card{text-align:center;}
     .team-card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:8px;}
     .team-card strong{display:block;}
 
-    /* ===== Contact ===== */
     form{display:grid;gap:8px;max-width:500px;}
     input, textarea{padding:10px;border-radius:8px;border:1px solid #ddd;width:100%;}
     button.submit-btn{background:var(--nav);color:#fff;padding:10px 14px;border:none;border-radius:8px;cursor:pointer;}
 
-    /* ===== Footer ===== */
     footer{text-align:center;padding:16px 0;color:var(--muted);font-size:14px;}
 
-    /* ===== Responsive ===== */
     @media(max-width:768px){
       .hero{flex-direction:column;}
       nav.desktop{display:none;}
@@ -135,27 +126,27 @@
     </section>
 
     <!-- Team -->
-<section id="team">
-  <h2>Екип</h2>
-  <div class="cards-grid">
-    <div class="team-card">
-      <!-- Първата снимка е обновена -->
-      <img src="https://picsum.photos/seed/newteam1/300/200" alt="Елена">
-      <strong>Д-р Елена Петрова</strong>
-      <p class="muted-small">Кариерен психолог — 10+ години опит</p>
-    </div>
-    <div class="team-card">
-      <img src="https://picsum.photos/seed/team2/300/200" alt="Иван">
-      <strong>Иван Димитров</strong>
-      <p class="muted-small">Консултант по кандидатстване</p>
-    </div>
-    <div class="team-card">
-      <img src="https://picsum.photos/seed/team3/300/200" alt="Мария">
-      <strong>Мария Георгиева</strong>
-      <p class="muted-small">Образователен анализатор</p>
-    </div>
-  </div>
-</section>
+    <section id="team">
+      <h2>Екип</h2>
+      <div class="cards-grid">
+        <!-- Първата снимка обновена с професионална докторка -->
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Д-р Елена">
+          <strong>Д-р Елена Петрова</strong>
+          <p class="muted-small">Кариерен психолог — 10+ години опит</p>
+        </div>
+        <div class="team-card">
+          <img src="https://picsum.photos/seed/team2/300/200" alt="Иван">
+          <strong>Иван Димитров</strong>
+          <p class="muted-small">Консултант по кандидатстване</p>
+        </div>
+        <div class="team-card">
+          <img src="https://picsum.photos/seed/team3/300/200" alt="Мария">
+          <strong>Мария Георгиева</strong>
+          <p class="muted-small">Образователен анализатор</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Contact -->
     <section id="contact" class="card">
