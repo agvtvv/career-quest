@@ -135,26 +135,27 @@
     </section>
 
     <!-- Team -->
-    <section id="team">
-      <h2>Екип</h2>
-      <div class="cards-grid">
-        <div class="team-card">
-          <img src="https://picsum.photos/seed/team1/300/200" alt="Елена">
-          <strong>Д-р Елена Петрова</strong>
-          <p class="muted-small">Кариерен психолог — 10+ години опит</p>
-        </div>
-        <div class="team-card">
-          <img src="https://picsum.photos/seed/team2/300/200" alt="Иван">
-          <strong>Иван Димитров</strong>
-          <p class="muted-small">Консултант по кандидатстване</p>
-        </div>
-        <div class="team-card">
-          <img src="https://picsum.photos/seed/team3/300/200" alt="Мария">
-          <strong>Мария Георгиева</strong>
-          <p class="muted-small">Образователен анализатор</p>
-        </div>
-      </div>
-    </section>
+<section id="team">
+  <h2>Екип</h2>
+  <div class="cards-grid">
+    <div class="team-card">
+      <!-- Първата снимка е обновена -->
+      <img src="https://picsum.photos/seed/newteam1/300/200" alt="Елена">
+      <strong>Д-р Елена Петрова</strong>
+      <p class="muted-small">Кариерен психолог — 10+ години опит</p>
+    </div>
+    <div class="team-card">
+      <img src="https://picsum.photos/seed/team2/300/200" alt="Иван">
+      <strong>Иван Димитров</strong>
+      <p class="muted-small">Консултант по кандидатстване</p>
+    </div>
+    <div class="team-card">
+      <img src="https://picsum.photos/seed/team3/300/200" alt="Мария">
+      <strong>Мария Георгиева</strong>
+      <p class="muted-small">Образователен анализатор</p>
+    </div>
+  </div>
+</section>
 
     <!-- Contact -->
     <section id="contact" class="card">
