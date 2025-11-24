@@ -33,6 +33,8 @@
     .team-card{text-align:center;}
     .team-card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:8px;}
     .team-card strong{display:block;}
+    ul{padding-left:18px;}
+    ul li{margin-bottom:6px;}
 
     form{display:grid;gap:8px;max-width:500px;}
     input, textarea{padding:10px;border-radius:8px;border:1px solid #ddd;width:100%;}
@@ -114,13 +116,28 @@
       <h2>Пакети</h2>
       <div class="cards-grid">
         <div class="card">
-          <strong>Starter</strong><p class="muted">Самооценка и ориентация</p>
+          <strong>Starter – 59.99 лв</strong>
+          <p class="muted">Фокус: самооценка и ориентация</p>
+          <ul>
+            <li>Тестове: Кой съм аз, Какво искам – какво мога, Нещата, които обичам да правя, Моята идеална работа</li>
+            <li>Допълнителни материали: Информационна индивидуална карта (обобщение на личност, интереси, способности)</li>
+          </ul>
         </div>
         <div class="card">
-          <strong>Advanced</strong><p class="muted">Умения, приоритети, социални аспекти</p>
+          <strong>Advanced – 199.99 лв</strong>
+          <p class="muted">Фокус: умения, приоритети и социални аспекти</p>
+          <ul>
+            <li>Тестове: всички от Starter + Подреждане на качествата на работа, Диагностика на интереси към определена професия, Оценка на работа с информация и организация, Партито, Способността ви за изграждане на кариера</li>
+            <li>Допълнителни материали: Информационна индивидуална карта (с анализ на новите тестове), ученическо портфолио</li>
+          </ul>
         </div>
         <div class="card">
-          <strong>Master</strong><p class="muted">Персонална подкрепа и кандидатстване</p>
+          <strong>Master – 289.99 лв</strong>
+          <p class="muted">Фокус: реално кандидатстване и персонална подкрепа</p>
+          <ul>
+            <li>Тестове: всички от Advanced + Междуличностна среща, Вашите значими постижения</li>
+            <li>Допълнителни услуги: Подготовка на CV и мотивационно писмо, Подготовка за интервю, Индивидуална среща със студент от избраната специалност и университет</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -129,12 +146,11 @@
     <section id="team">
       <h2>Екип</h2>
       <div class="cards-grid">
-        <!-- Новата професионална докторка -->
         <div class="team-card">
-  <img src="https://images.pexels.com/photos/5327583/pexels-photo-5327583.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=300" alt="Д-р Елена">
-  <strong>Д-р Елена Петрова</strong>
-  <p class="muted-small">Кариерен психолог — 10+ години опит</p>
-</div>
+          <img src="https://images.pexels.com/photos/5327583/pexels-photo-5327583.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=300" alt="Д-р Елена">
+          <strong>Д-р Елена Петрова</strong>
+          <p class="muted-small">Кариерен психолог — 10+ години опит</p>
+        </div>
         <div class="team-card">
           <img src="https://picsum.photos/seed/team2/300/200" alt="Иван">
           <strong>Иван Димитров</strong>
