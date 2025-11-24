@@ -131,10 +131,10 @@
       <div class="cards-grid">
         <!-- Новата професионална докторка -->
         <div class="team-card">
-          <img src="https://images.unsplash.com/photo-1588776814546-50f99f0c9ff2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fGZlbWFsZSUyMGRvY3RvcnxlbnwwfHx8fDE2OTcyODc5NTM&ixlib=rb-4.0.3&q=80&w=400" alt="Д-р Елена">
-          <strong>Д-р Елена Петрова</strong>
-          <p class="muted-small">Кариерен психолог — 10+ години опит</p>
-        </div>
+  <img src="https://images.pexels.com/photos/5327583/pexels-photo-5327583.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=300" alt="Д-р Елена">
+  <strong>Д-р Елена Петрова</strong>
+  <p class="muted-small">Кариерен психолог — 10+ години опит</p>
+</div>
         <div class="team-card">
           <img src="https://picsum.photos/seed/team2/300/200" alt="Иван">
           <strong>Иван Димитров</strong>
