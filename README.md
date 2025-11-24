@@ -129,9 +129,9 @@
     <section id="team">
       <h2>Екип</h2>
       <div class="cards-grid">
-        <!-- Първата снимка обновена с професионална докторка -->
+        <!-- Новата професионална докторка -->
         <div class="team-card">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Д-р Елена">
+          <img src="https://images.unsplash.com/photo-1588776814546-50f99f0c9ff2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fGZlbWFsZSUyMGRvY3RvcnxlbnwwfHx8fDE2OTcyODc5NTM&ixlib=rb-4.0.3&q=80&w=400" alt="Д-р Елена">
           <strong>Д-р Елена Петрова</strong>
           <p class="muted-small">Кариерен психолог — 10+ години опит</p>
         </div>
@@ -165,7 +165,6 @@
   </div>
 
   <script>
-    // Mobile menu toggle
     const mobMenu = document.querySelector('.mobile-menu');
     const hamburger = document.querySelector('.hamburger');
     hamburger.addEventListener('click', ()=> mobMenu.style.display = mobMenu.style.display==='flex'?'none':'flex');
