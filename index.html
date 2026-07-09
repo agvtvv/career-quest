@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Frontage — A website for your business, built in minutes</title>
+<meta name="description" content="Frontage builds a professional website for your business in minutes — no code, no designer. Join the waitlist for early access and founding pricing." />
+<style>
+  :root{
+    --bg:#0b0f19;
+    --bg-soft:#10152447;
+    --ink:#0b0f19;
+    --paper:#ffffff;
+    --paper-alt:#f6f7fb;
+    --muted:#5b6270;
+    --line:#e7e9ef;
+    --brand:#2f5bff;
+    --brand-dark:#1c3fd6;
+    --accent:#ffb648;
+    --good:#1fa971;
+    --shadow: 0 20px 50px -20px rgba(20,30,70,0.35);
+    --radius: 16px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;letter-spacing:.02em;
+    color:var(--brand); background:rgba(47,91,255,0.08);
+    padding:6px 12px;border-radius:999px;
+  }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 22px;border-radius:12px;border:none;cursor:pointer;
+    font-weight:700;font-size:15px;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 10px 24px -8px rgba(47,91,255,0.6);}
+  .btn-primary:hover{background:var(--brand-dark);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:#c7ccdb;}
+  .btn-block{width:100%;}
+  .btn-sm{padding:10px 16px;font-size:14px;border-radius:10px;}
+
+  /* Header */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-0.01em;}
+  .brand .mark{
+    width:32px;height:32px;border-radius:9px;
+    background:linear-gradient(135deg,var(--brand),#7a5cff);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;
+  }
+  nav.links{display:flex;gap:28px;}
+  nav.links a{font-weight:600;font-size:14.5px;color:var(--muted);text-decoration:none;}
+  nav.links a:hover{color:var(--ink);}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+  .hamburger span{width:22px;height:2px;background:var(--ink);border-radius:2px;}
+  .mobile-menu{display:none;flex-direction:column;gap:14px;padding:16px 24px 22px;border-top:1px solid var(--line);}
+  .mobile-menu a{font-weight:600;color:var(--ink);text-decoration:none;}
+  .mobile-menu.open{display:flex;}
+
+  /* Hero */
+  .hero{
+    background:
+      radial-gradient(900px 420px at 85% -10%, rgba(122,92,255,0.18), transparent 60%),
+      radial-gradient(700px 380px at 0% 0%, rgba(47,91,255,0.12), transparent 55%);
+    padding:64px 0 40px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;}
+  .hero h1{
+    font-size:clamp(32px,4.4vw,52px);line-height:1.06;letter-spacing:-0.02em;margin:18px 0 18px;font-weight:800;
+  }
+  .hero h1 em{font-style:normal;color:var(--brand);}
+  .hero p.lead{font-size:18px;color:var(--muted);max-width:520px;margin:0 0 28px;}
+  .hero-cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px;}
+  .trust-line{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13.5px;margin-top:6px;}
+  .avatars{display:flex;}
+  .avatars span{
+    width:26px;height:26px;border-radius:50%;border:2px solid #fff;margin-left:-8px;
+    background:linear-gradient(135deg,#ffb648,#ff7a59);display:inline-block;
+  }
+  .avatars span:first-child{margin-left:0;}
+  .avatars span:nth-child(2){background:linear-gradient(135deg,#2f5bff,#7a5cff);}
+  .avatars span:nth-child(3){background:linear-gradient(135deg,#1fa971,#3ecf8e);}
+  .avatars span:nth-child(4){background:linear-gradient(135deg,#ff5a8c,#ff8ab0);}
+
+  /* Hero mock browser card */
+  .mock{
+    background:var(--paper);border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;
+    transform:rotate(1.2deg);
+  }
+  .mock .bar{display:flex;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--paper-alt);}
+  .mock .bar i{width:10px;height:10px;border-radius:50%;background:#e2e5ee;display:inline-block;}
+  .mock-body{padding:22px;}
+  .mock-hero{
+    border-radius:12px;background:linear-gradient(135deg,#eef1ff,#f7f2ff);padding:22px;margin-bottom:14px;
+  }
+  .mock-hero .t1{height:12px;width:60%;background:#c9d1ff;border-radius:6px;margin-bottom:10px;}
+  .mock-hero .t2{height:8px;width:85%;background:#dfe3f7;border-radius:6px;margin-bottom:8px;}
+  .mock-hero .t3{height:8px;width:70%;background:#dfe3f7;border-radius:6px;margin-bottom:14px;}
+  .mock-hero .btn-fake{height:26px;width:110px;background:var(--brand);border-radius:8px;}
+  .mock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .mock-card{border:1px solid var(--line);border-radius:10px;padding:10px;}
+  .mock-card .ph-img{height:38px;border-radius:6px;background:#eef1f8;margin-bottom:8px;}
+  .mock-card .ph-line{height:6px;background:#e7e9f3;border-radius:4px;margin-bottom:6px;}
+  .mock-card .ph-line.short{width:60%;}
+
+  /* Sections */
+  section{padding:72px 0;}
+  .section-head{max-width:640px;margin:0 auto 44px;text-align:center;}
+  .section-head h2{font-size:clamp(26px,3vw,36px);letter-spacing:-0.01em;margin:14px 0 12px;font-weight:800;}
+  .section-head p{color:var(--muted);font-size:16.5px;}
+
+  .stats{background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;padding:44px 0;}
+  .stats-grid .num{font-size:clamp(26px,3.2vw,34px);font-weight:800;color:var(--brand);}
+  .stats-grid .label{color:var(--muted);font-size:14px;margin-top:6px;}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;}
+  .step .n{
+    width:36px;height:36px;border-radius:10px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:15px;margin-bottom:16px;
+  }
+  .step h3{margin:0 0 8px;font-size:18px;}
+  .step p{margin:0;color:var(--muted);font-size:15px;}
+
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .feature{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+  .feature .icon{
+    width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    background:rgba(47,91,255,0.1);color:var(--brand);margin-bottom:14px;font-size:19px;
+  }
+  .feature h3{margin:0 0 6px;font-size:16.5px;}
+  .feature p{margin:0;color:var(--muted);font-size:14.5px;}
+
+  .band-dark{
+    background:linear-gradient(160deg,#0b0f19,#161c33);
+    color:#fff;
+  }
+  .band-dark .section-head p{color:#a9afc4;}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .quote{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:24px;}
+  .quote p.qtext{font-size:15px;color:#dfe2ee;margin:0 0 16px;}
+  .quote .who{display:flex;align-items:center;gap:10px;}
+  .quote .who .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#ff7a59);}
+  .quote .who strong{font-size:14px;display:block;}
+  .quote .who span{font-size:13px;color:#a9afc4;}
+  .badge-note{text-align:center;color:#8b93ac;font-size:12.5px;margin-top:18px;}
+
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;}
+  .plan{border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;}
+  .plan.highlight{border-color:var(--brand);box-shadow:0 18px 40px -18px rgba(47,91,255,0.45);position:relative;}
+  .plan .tag{position:absolute;top:-12px;left:24px;background:var(--brand);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;}
+  .plan h3{margin:0 0 6px;font-size:19px;}
+  .plan .price{font-size:32px;font-weight:800;margin:10px 0 4px;}
+  .plan .price span{font-size:14px;font-weight:600;color:var(--muted);}
+  .plan .strike{color:var(--muted);text-decoration:line-through;font-size:14px;margin-bottom:14px;}
+  .plan ul{list-style:none;padding:0;margin:18px 0 24px;flex:1;}
+  .plan ul li{display:flex;gap:8px;font-size:14.5px;color:#333;margin-bottom:10px;}
+  .plan ul li:before{content:"✓";color:var(--good);font-weight:800;}
+
+  .faq{max-width:760px;margin:0 auto;}
+  details{border-bottom:1px solid var(--line);padding:18px 0;}
+  details summary{cursor:pointer;font-weight:700;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary:after{content:"+";font-size:22px;font-weight:400;color:var(--muted);}
+  details[open] summary:after{content:"–";}
+  details p{color:var(--muted);margin:12px 0 0;font-size:15px;}
+
+  /* Waitlist form */
+  .waitlist-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:28px;
+  }
+  .waitlist-card h3{margin:0 0 6px;font-size:19px;}
+  .waitlist-card p.sub{color:var(--muted);font-size:14px;margin:0 0 18px;}
+  form.waitlist{display:grid;gap:12px;}
+  .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;}
+  .field input, .field select{
+    width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-size:15px;font-family:inherit;background:#fbfbfd;
+  }
+  .field input:focus, .field select:focus{outline:2px solid var(--brand);outline-offset:1px;background:#fff;}
+  .row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .form-msg{font-size:13.5px;margin-top:4px;min-height:18px;}
+  .form-msg.error{color:#d43b3b;}
+  .form-msg.success{color:var(--good);font-weight:600;}
+  .fine{font-size:12px;color:var(--muted);margin-top:10px;}
+  .success-state{display:none;text-align:center;padding:20px 6px;}
+  .success-state .check{
+    width:52px;height:52px;border-radius:50%;background:rgba(31,169,113,0.12);color:var(--good);
+    display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;
+  }
+  .success-state h4{margin:0 0 8px;font-size:18px;}
+  .success-state p{color:var(--muted);font-size:14.5px;margin:0;}
+
+  .cta-final{
+    background:linear-gradient(135deg,var(--brand),#5b3dff);
+    color:#fff;border-radius:24px;padding:56px 40px;text-align:center;
+  }
+  .cta-final h2{font-size:clamp(24px,3vw,32px);margin:0 0 12px;font-weight:800;}
+  .cta-final p{color:#dbe1ff;max-width:480px;margin:0 auto 26px;}
+  .cta-final .waitlist-card{background:#fff;color:var(--ink);max-width:520px;margin:0 auto;text-align:left;}
+
+  footer.site{border-top:1px solid var(--line);padding:40px 0 30px;}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:center;}
+  .footer-links{display:flex;gap:22px;}
+  .footer-links a{font-size:14px;color:var(--muted);text-decoration:none;}
+  .footer-links a:hover{color:var(--ink);}
+  .copyright{color:var(--muted);font-size:13px;}
+
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr;}
+    .mock{transform:none;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .steps, .features-grid, .quotes, .pricing-grid{grid-template-columns:1fr;}
+    nav.links{display:none;}
+    .hamburger{display:flex;}
+  }
+  @media (max-width:560px){
+    .row-2{grid-template-columns:1fr;}
+    .cta-final{padding:40px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="#top" class="brand"><span class="mark">F</span>Frontage</a>
+    <nav class="links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="#waitlist">Join waitlist</a>
+      <button class="hamburger" aria-label="Menu" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#waitlist">Join waitlist</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">🚀 Now building the waitlist — launching soon</span>
+        <h1>Give your business a <em>front door</em> on the internet.</h1>
+        <p class="lead">Frontage turns a five-minute conversation about your business into a real, professional website — live the same day. No code, no designer, no $3,000 invoice.</p>
+        <div class="hero-cta-row">
+          <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <div class="trust-line">
+          <div class="avatars"><span></span><span></span><span></span><span></span></div>
+          <span><strong id="heroCount">482</strong> business owners already on the list</span>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="mock-body">
+          <div class="mock-hero">
+            <div class="t1"></div>
+            <div class="t2"></div>
+            <div class="t3"></div>
+            <div class="btn-fake"></div>
+          </div>
+          <div class="mock-grid">
+            <div class="mock-card"><div class="ph-img"></div><div class="ph-line"></div><div class="ph-line short"></div></div>
+            <div class="mock-card"><div class="ph-img"></div><div class="ph-line"></div><div class="ph-line short"></div></div>
+            <div class="mock-card"><div class="ph-img"></div><div class="ph-line"></div><div class="ph-line short"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div><div class="num">27M+</div><div class="label">U.S. small businesses today</div></div>
+      <div><div class="num">~30%</div><div class="label">still have no website at all</div></div>
+      <div><div class="num">5 min</div><div class="label">to go from nothing to live site</div></div>
+      <div><div class="num">$0</div><div class="label">design or dev skills required</div></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From "we don't have a website" to live — in three steps.</h2>
+        <p>No templates to wrestle with, no drag-and-drop learning curve. Just answer a few questions about your business.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h3>Tell us about your business</h3>
+          <p>Answer a short set of questions — what you do, who you serve, your hours, photos if you have them. Two minutes, tops.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h3>Frontage builds your site</h3>
+          <p>We generate a complete site — copy, layout, photos, contact form and booking links — matched to your industry.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h3>Publish and get found</h3>
+          <p>Go live on your own domain instantly, with basic SEO and Google Business setup baked in. Edit anytime by just describing the change.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" style="background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Built for local businesses</span>
+        <h2>Everything you need. Nothing you have to manage.</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature"><div class="icon">✍️</div><h3>AI-written copy</h3><p>Real, plain-English website text about your actual business — not generic filler.</p></div>
+        <div class="feature"><div class="icon">📱</div><h3>Mobile-first</h3><p>Most of your customers will find you on a phone. Every site looks sharp there first.</p></div>
+        <div class="feature"><div class="icon">🌐</div><h3>Custom domain</h3><p>Use a domain you already own or grab a new one — connected in a couple of clicks.</p></div>
+        <div class="feature"><div class="icon">🔍</div><h3>SEO built in</h3><p>Proper titles, structured data and a Google Business listing setup from day one.</p></div>
+        <div class="feature"><div class="icon">📅</div><h3>Bookings & contact</h3><p>Built-in contact forms, click-to-call, and booking links so customers can reach you.</p></div>
+        <div class="feature"><div class="icon">💬</div><h3>Edit by chatting</h3><p>Want to change your hours or add a promo? Just tell Frontage — no editor to learn.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="band-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" style="background:rgba(255,255,255,0.1);color:#fff;">What early testers are saying</span>
+        <h2>Small businesses, real front doors.</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote">
+          <p class="qtext">"I've been putting off getting a website for two years. This took less time than my lunch break."</p>
+          <div class="who"><div class="av"></div><div><strong>Maria O.</strong><span>Hair Studio Owner</span></div></div>
+        </div>
+        <div class="quote">
+          <p class="qtext">"Customers kept asking if we had a site. Now when they Google us, we actually show up."</p>
+          <div class="who"><div class="av"></div><div><strong>Daniel R.</strong><span>Landscaping Business</span></div></div>
+        </div>
+        <div class="quote">
+          <p class="qtext">"No back-and-forth with a freelancer, no waiting weeks. It just worked."</p>
+          <div class="who"><div class="av"></div><div><strong>Priya K.</strong><span>Bakery Owner</span></div></div>
+        </div>
+      </div>
+      <p class="badge-note">Illustrative feedback from private beta testers — names shown are first name + last initial for privacy.</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Founding pricing</span>
+        <h2>Simple pricing. Locked in for waitlist members.</h2>
+        <p>Join now and your plan's price is frozen for as long as you stay subscribed — even after we raise prices at launch.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan">
+          <h3>Starter</h3>
+          <div class="price">$0<span>/mo</span></div>
+          <p style="color:var(--muted);font-size:14px;">Get discovered with the basics</p>
+          <ul>
+            <li>1-page business site</li>
+            <li>Frontage subdomain</li>
+            <li>Contact form</li>
+            <li>Basic SEO</li>
+          </ul>
+          <a href="#waitlist" class="btn btn-ghost btn-block">Join waitlist</a>
+        </div>
+        <div class="plan highlight">
+          <span class="tag">Most popular</span>
+          <h3>Growth</h3>
+          <div class="strike">$29/mo</div>
+          <div class="price">$15<span>/mo founding price</span></div>
+          <p style="color:var(--muted);font-size:14px;">For businesses ready to be found</p>
+          <ul>
+            <li>Everything in Starter</li>
+            <li>Custom domain</li>
+            <li>Google Business setup</li>
+            <li>Bookings & online forms</li>
+            <li>Edit-by-chat updates</li>
+          </ul>
+          <a href="#waitlist" class="btn btn-primary btn-block">Join waitlist</a>
+        </div>
+        <div class="plan">
+          <h3>Pro</h3>
+          <div class="strike">$79/mo</div>
+          <div class="price">$39<span>/mo founding price</span></div>
+          <p style="color:var(--muted);font-size:14px;">Multi-location & growing teams</p>
+          <ul>
+            <li>Everything in Growth</li>
+            <li>Multiple locations</li>
+            <li>Priority support</li>
+            <li>Advanced analytics</li>
+          </ul>
+          <a href="#waitlist" class="btn btn-ghost btn-block">Join waitlist</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions, answered.</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>Do I need any technical skills?</summary>
+          <p>None at all. If you can answer questions about your own business, you can use Frontage. There's no drag-and-drop editor to learn.</p>
+        </details>
+        <details>
+          <summary>Can I use my own domain name?</summary>
+          <p>Yes. Connect a domain you already own, or buy a new one during setup — either way, it's a couple of clicks.</p>
+        </details>
+        <details>
+          <summary>What if I already have some photos and branding?</summary>
+          <p>Upload what you have and Frontage will use it. If you don't have any photos yet, we'll use relevant stock imagery until you do.</p>
+        </details>
+        <details>
+          <summary>When does Frontage launch?</summary>
+          <p>We're onboarding waitlist members in small batches, starting soon. Joining the waitlist secures your spot and locks in founding pricing.</p>
+        </details>
+        <details>
+          <summary>How much will it cost?</summary>
+          <p>There's a free Starter plan. Paid plans start at $15/mo for waitlist members — locked in for as long as you remain subscribed.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section id="waitlist">
+    <div class="wrap">
+      <div class="cta-final">
+        <h2>Be first in line for Frontage</h2>
+        <p>Join the waitlist and we'll email you the moment it's your turn — plus your founding-member price, locked in for good.</p>
+        <div class="waitlist-card">
+          <h3>Join the waitlist</h3>
+          <p class="sub">Takes 20 seconds. No spam, ever.</p>
+
+          <form class="waitlist" id="waitlistForm">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" placeholder="Jamie Rivera" required />
+            </div>
+            <div class="row-2">
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@business.com" required />
+              </div>
+              <div class="field">
+                <label for="business">Business name</label>
+                <input type="text" id="business" name="business" placeholder="Rivera Landscaping" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="type">Business type</label>
+              <select id="type" name="type">
+                <option value="">Select one (optional)</option>
+                <option>Restaurant / Café</option>
+                <option>Salon / Spa / Barber</option>
+                <option>Contractor / Home services</option>
+                <option>Retail shop</option>
+                <option>Health / Wellness practice</option>
+                <option>Consulting / Professional services</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Join waitlist</button>
+            <div class="form-msg" id="formMsg"></div>
+            <p class="fine">By joining, you agree to receive occasional emails about Frontage's launch. Unsubscribe anytime.</p>
+          </form>
+
+          <div class="success-state" id="successState">
+            <div class="check">✓</div>
+            <h4>You're on the list!</h4>
+            <p>We'll email you the moment Frontage is ready for your business.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <a href="#top" class="brand"><span class="mark">F</span>Frontage</a>
+    <div class="footer-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="copyright">© 2026 Frontage. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // ---------------------------------------------------------------
+  // Waitlist form handling
+  //
+  // This is a static page with no server of its own, so signups are
+  // submitted to an external form backend. Set FORM_ENDPOINT below to
+  // a real endpoint before going live (e.g. a Formspree/Getform form
+  // action URL, or your own API). Until then, submissions are only
+  // stored locally in the browser so the flow can be demoed end to end.
+  // See README_WAITLIST.md for setup steps.
+  // ---------------------------------------------------------------
+  const FORM_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxx"
+
+  const form = document.getElementById('waitlistForm');
+  const msg = document.getElementById('formMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  const successState = document.getElementById('successState');
+  const heroCount = document.getElementById('heroCount');
+
+  function bumpHeroCount(){
+    const base = parseInt(heroCount.textContent, 10) || 0;
+    heroCount.textContent = base + 1;
+  }
+
+  function saveLocally(entry){
+    try{
+      const key = 'frontage_waitlist';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      existing.push(entry);
+      localStorage.setItem(key, JSON.stringify(existing));
+    }catch(e){ /* localStorage unavailable, ignore */ }
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    msg.textContent = '';
+    msg.className = 'form-msg';
+
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      business: form.business.value.trim(),
+      type: form.type.value,
+      submittedAt: new Date().toISOString()
+    };
+
+    if(!data.name || !data.email){
+      msg.textContent = 'Please fill in your name and email.';
+      msg.className = 'form-msg error';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Joining…';
+
+    saveLocally(data);
+
+    try{
+      if(FORM_ENDPOINT){
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if(!res.ok) throw new Error('Request failed');
+      }
+      form.style.display = 'none';
+      successState.style.display = 'block';
+      bumpHeroCount();
+    }catch(err){
+      msg.textContent = "Something went wrong reaching our signup service — but you're saved locally. Please try again shortly.";
+      msg.className = 'form-msg error';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Join waitlist';
+    }
+  });
+</script>
+
+</body>
+</html>
