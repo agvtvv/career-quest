@@ -130,7 +130,7 @@
   #booking{background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .booking-card{
     background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
-    padding:8px;max-width:900px;margin:0 auto;min-height:520px;display:flex;align-items:stretch;
+    padding:8px;max-width:640px;margin:0 auto;min-height:auto;display:flex;align-items:stretch;
   }
   .booking-card iframe{width:100%;min-height:640px;border:none;border-radius:14px;}
   .booking-fallback{
@@ -139,6 +139,33 @@
   .booking-fallback .icon{font-size:34px;margin-bottom:14px;}
   .booking-fallback h3{margin:0 0 10px;font-size:20px;}
   .booking-fallback p{color:var(--muted);font-size:15px;max-width:420px;margin:0 auto 22px;}
+
+  .booking-form{display:none;flex-direction:column;gap:14px;padding:28px;width:100%;}
+  .booking-form .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;}
+  .booking-form input, .booking-form select{
+    width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-size:15px;
+    font-family:inherit;background:#fbfaf7;
+  }
+  .booking-form input:focus, .booking-form select:focus{outline:2px solid var(--gold);outline-offset:1px;background:#fff;}
+  .row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .slot-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+  .slot-btn{
+    padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:#fbfaf7;cursor:pointer;
+    font-size:14px;font-weight:600;font-family:inherit;
+  }
+  .slot-btn:hover{border-color:var(--gold);}
+  .slot-btn.selected{background:var(--gold);border-color:var(--gold);color:#241a0d;}
+  .slot-empty{color:var(--muted);font-size:14px;padding:6px 0;}
+  .form-msg{font-size:13.5px;margin-top:2px;min-height:18px;}
+  .form-msg.error{color:#b3261e;}
+  .form-msg.success{color:#1f7a4d;font-weight:600;}
+  .booking-success{display:none;text-align:center;padding:44px 24px;margin:auto;}
+  .booking-success .check{
+    width:52px;height:52px;border-radius:50%;background:rgba(31,122,77,0.12);color:#1f7a4d;
+    display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;
+  }
+  .booking-success h3{margin:0 0 8px;font-size:19px;}
+  .booking-success p{color:var(--muted);font-size:14.5px;margin:0;}
 
   .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;}
   .contact-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
@@ -311,18 +338,66 @@
       </div>
       <div class="booking-card" id="bookingCard">
         <!--
-          SETUP NOTE (remove this comment once wired up):
-          Once the Setmore account is created and the embed snippet is generated
-          (Setmore dashboard → Booking Page → "Embed on your website"), paste the
-          iframe src URL into SETMORE_BOOKING_URL in the script below. Until then,
-          this section shows a graceful "call to book" fallback instead of a
-          broken embed.
+          SETUP NOTE: once the Google Sheet + Apps Script backend is deployed
+          (see ../SETUP_BOOKING.md), paste the Web App URL into
+          GOOGLE_SCRIPT_URL in the script below. Until then, this section
+          shows a graceful "call to book" fallback instead of a broken form.
         -->
         <div class="booking-fallback" id="bookingFallback">
           <div class="icon">🗓️</div>
           <h3>Онлайн запазването пристига съвсем скоро</h3>
           <p>Междувременно можеш да запазиш часа си по телефона — отговаряме бързо.</p>
           <a class="btn btn-primary" href="tel:0889771917">📞 Обади се: 088 977 1917</a>
+        </div>
+
+        <form class="booking-form" id="bookingForm">
+          <div class="field">
+            <label for="bName">Име</label>
+            <input type="text" id="bName" required />
+          </div>
+          <div class="field">
+            <label for="bEmail">Имейл</label>
+            <input type="email" id="bEmail" required placeholder="ще получиш напомняне тук" />
+          </div>
+          <div class="field">
+            <label for="bService">Услуга</label>
+            <select id="bService" required>
+              <option value="">Избери услуга</option>
+              <option>Мъжка подстрижка</option>
+              <option>Оформяне на брада</option>
+              <option>Класическо бръснене</option>
+              <option>Подстрижка + брада</option>
+              <option>Детска подстрижка</option>
+              <option>Измиване и стилизиране</option>
+            </select>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="bStylist">Стилист</label>
+              <select id="bStylist" required>
+                <option value="">Зареждане...</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bDate">Дата</label>
+              <input type="date" id="bDate" required />
+            </div>
+          </div>
+          <div class="field">
+            <label>Свободен час</label>
+            <div class="slot-grid" id="slotGrid">
+              <span class="slot-empty">Избери стилист и дата, за да видиш свободните часове.</span>
+            </div>
+            <input type="hidden" id="bTime" required />
+          </div>
+          <button type="submit" class="btn btn-gold btn-block" id="bookingSubmit">Запази часа</button>
+          <div class="form-msg" id="bookingMsg"></div>
+        </form>
+
+        <div class="booking-success" id="bookingSuccess">
+          <div class="check">✓</div>
+          <h3>Часът е запазен!</h3>
+          <p>Ще получиш имейл напомняне един час преди часа си.</p>
         </div>
       </div>
     </div>
@@ -388,18 +463,122 @@
 
 <script>
   // ---------------------------------------------------------------
-  // Booking widget wiring.
+  // Booking backend wiring (Google Sheets + Apps Script — see
+  // google-apps-script/Code.gs and SETUP_BOOKING.md).
   //
-  // Set SETMORE_BOOKING_URL once the Setmore account is set up (see
-  // ../SETUP_BOOKING.md for the exact steps: create staff, hide the
-  // phone field so only name+email are required, set the reminder
-  // lead time to 1 hour, then copy the embed URL here).
+  // Set GOOGLE_SCRIPT_URL once the Apps Script Web App is deployed.
+  // Until then, the "call to book" fallback stays visible.
   // ---------------------------------------------------------------
-  const SETMORE_BOOKING_URL = ""; // e.g. "https://booking-page.setmore.com/scheduler/xxxxx"
+  const GOOGLE_SCRIPT_URL = ""; // e.g. "https://script.google.com/macros/s/XXXXXXXX/exec"
 
-  if (SETMORE_BOOKING_URL) {
-    const card = document.getElementById('bookingCard');
-    card.innerHTML = `<iframe src="${SETMORE_BOOKING_URL}" title="Запази час"></iframe>`;
+  if (GOOGLE_SCRIPT_URL) {
+    document.getElementById('bookingFallback').style.display = 'none';
+    const form = document.getElementById('bookingForm');
+    form.style.display = 'flex';
+
+    const stylistSelect = document.getElementById('bStylist');
+    const dateInput = document.getElementById('bDate');
+    const slotGrid = document.getElementById('slotGrid');
+    const timeField = document.getElementById('bTime');
+    const msg = document.getElementById('bookingMsg');
+    const submitBtn = document.getElementById('bookingSubmit');
+
+    const today = new Date();
+    dateInput.min = today.toISOString().slice(0, 10);
+    const maxDate = new Date(today.getTime() + 21 * 24 * 60 * 60 * 1000);
+    dateInput.max = maxDate.toISOString().slice(0, 10);
+
+    function setMsg(text, kind) {
+      msg.textContent = text || '';
+      msg.className = 'form-msg' + (kind ? ' ' + kind : '');
+    }
+
+    fetch(`${GOOGLE_SCRIPT_URL}?action=stylists`)
+      .then(r => r.json())
+      .then(data => {
+        stylistSelect.innerHTML = '<option value="">Избери стилист</option>';
+        (data.stylists || []).forEach(name => {
+          const opt = document.createElement('option');
+          opt.value = name; opt.textContent = name;
+          stylistSelect.appendChild(opt);
+        });
+      })
+      .catch(() => { stylistSelect.innerHTML = '<option value="">Грешка при зареждане</option>'; });
+
+    function refreshSlots() {
+      timeField.value = '';
+      const stylist = stylistSelect.value;
+      const date = dateInput.value;
+      if (!stylist || !date) {
+        slotGrid.innerHTML = '<span class="slot-empty">Избери стилист и дата, за да видиш свободните часове.</span>';
+        return;
+      }
+      slotGrid.innerHTML = '<span class="slot-empty">Зареждане на свободни часове...</span>';
+      fetch(`${GOOGLE_SCRIPT_URL}?action=slots&stylist=${encodeURIComponent(stylist)}&date=${encodeURIComponent(date)}`)
+        .then(r => r.json())
+        .then(data => {
+          const slots = data.slots || [];
+          if (!slots.length) {
+            slotGrid.innerHTML = '<span class="slot-empty">Няма свободни часове за тази дата.</span>';
+            return;
+          }
+          slotGrid.innerHTML = '';
+          slots.forEach(time => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'slot-btn';
+            btn.textContent = time;
+            btn.addEventListener('click', () => {
+              slotGrid.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+              btn.classList.add('selected');
+              timeField.value = time;
+            });
+            slotGrid.appendChild(btn);
+          });
+        })
+        .catch(() => { slotGrid.innerHTML = '<span class="slot-empty">Грешка при зареждане.</span>'; });
+    }
+
+    stylistSelect.addEventListener('change', refreshSlots);
+    dateInput.addEventListener('change', refreshSlots);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setMsg('');
+      if (!timeField.value) { setMsg('Моля, избери свободен час.', 'error'); return; }
+
+      const payload = {
+        name: document.getElementById('bName').value.trim(),
+        email: document.getElementById('bEmail').value.trim(),
+        service: document.getElementById('bService').value,
+        stylist: stylistSelect.value,
+        date: dateInput.value,
+        time: timeField.value
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Изпращане...';
+      try {
+        const res = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.success) {
+          form.style.display = 'none';
+          document.getElementById('bookingSuccess').style.display = 'block';
+        } else {
+          setMsg(result.error || 'Нещо се обърка. Опитай пак.', 'error');
+          refreshSlots(); // the slot may have just been taken — refresh options
+        }
+      } catch (err) {
+        setMsg('Проблем с връзката. Опитай пак след малко.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Запази часа';
+      }
+    });
   }
 </script>
 
