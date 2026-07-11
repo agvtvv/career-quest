@@ -79,17 +79,16 @@
 
   .hero-photo{
     position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
-    aspect-ratio:4/3;background:
-      linear-gradient(135deg,#2a2320,#3d322b);
+    aspect-ratio:4/3;
+    background:
+      radial-gradient(circle at 50% 32%, rgba(184,137,74,0.22), transparent 60%),
+      linear-gradient(160deg,#1c1613,#2e2420 60%,#241d18);
+    display:flex;align-items:center;justify-content:center;
   }
-  .hero-photo .chairs{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:18px;}
-  .chair{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;position:relative;overflow:hidden;}
-  .chair:after{content:"";position:absolute;left:50%;top:58%;width:46%;height:34%;background:rgba(184,137,74,0.35);border-radius:8px 8px 4px 4px;transform:translateX(-50%);}
-  .chair:before{content:"";position:absolute;left:50%;top:22%;width:30%;height:26%;background:rgba(255,255,255,0.18);border-radius:50%;transform:translateX(-50%);}
-  .hero-photo .caption{
-    position:absolute;left:0;right:0;bottom:0;padding:14px 18px;background:linear-gradient(0deg,rgba(0,0,0,0.55),transparent);
-    color:#f4efe7;font-size:13px;font-weight:600;
-  }
+  .hero-photo-content{text-align:center;color:#f4efe7;padding:0 20px;}
+  .hero-icon{width:64px;height:64px;margin:0 auto 16px;}
+  .hero-photo-title{font-size:19px;font-weight:800;letter-spacing:0.01em;}
+  .hero-photo-sub{font-size:12.5px;color:#c9bda3;margin-top:6px;letter-spacing:0.06em;text-transform:uppercase;}
 
   section{padding:68px 0;}
   .section-head{max-width:640px;margin:0 auto 40px;text-align:center;}
@@ -264,12 +263,24 @@
         </div>
       </div>
       <div class="hero-photo">
-        <div class="chairs">
-          <div class="chair"></div>
-          <div class="chair"></div>
-          <div class="chair"></div>
+        <!-- Placeholder brand panel until a real interior photo is available — see SETUP_BOOKING.md -->
+        <div class="hero-photo-content">
+          <svg class="hero-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#e9c98a" stroke-width="2.2" stroke-linecap="round">
+              <circle cx="19" cy="16" r="3.2"/>
+              <circle cx="19" cy="26" r="3.2"/>
+              <line x1="21.5" y1="18" x2="41" y2="34"/>
+              <line x1="21.5" y1="24" x2="41" y2="8"/>
+              <circle cx="45" cy="16" r="3.2"/>
+              <circle cx="45" cy="26" r="3.2"/>
+              <line x1="42.5" y1="18" x2="23" y2="34"/>
+              <line x1="42.5" y1="24" x2="23" y2="8"/>
+            </g>
+            <path d="M20 46c3-3.6 7.5-5.4 12-5.4s9 1.8 12 5.4c-3 2.2-7.5 3.2-12 3.2s-9-1-12-3.2z" fill="#e9c98a"/>
+          </svg>
+          <div class="hero-photo-title">Alan's Barber House</div>
+          <div class="hero-photo-sub">кв. Белите брези · София</div>
         </div>
-        <div class="caption">Салонът на Alan's Barber House — постави истинска снимка тук</div>
       </div>
     </div>
   </section>
