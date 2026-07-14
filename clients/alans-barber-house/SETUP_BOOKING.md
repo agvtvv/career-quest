@@ -10,37 +10,30 @@ attached to a Google Sheet. Every booking becomes a row in that Sheet
 10 minutes, the script checks for any appointment starting in about an
 hour and emails the customer a reminder automatically.
 
-## One-time setup (about 10 minutes)
+## One-time setup (about 5 minutes)
 
 ### 1. Create the Sheet
-1. Go to [sheets.google.com](https://sheets.google.com) and create a new
-   blank spreadsheet. Name it "Alan's Barber House — Bookings".
-2. Rename the first tab (bottom-left) to `Bookings`. In row 1, type these
-   exact column headers, one per cell, A through H:
-   `Timestamp | Name | Email | Service | Stylist | Date | Time | ReminderSent`
-3. Add a second tab (click the **+** at the bottom) named `Stylists`.
-   In row 1 put headers: `Name | StartTime | EndTime | WorkDays`.
-   Then add one row per stylist below, for example:
-
-   | Name | StartTime | EndTime | WorkDays |
-   |---|---|---|---|
-   | Стилист 1 | 09:00 | 20:00 | 1,2,3,4,5,6 |
-   | Стилист 2 | 09:00 | 20:00 | 1,2,3,4,5,6 |
-   | Стилист 3 | 09:00 | 20:00 | 1,2,3,4,5,6 |
-
-   `WorkDays` is which days that stylist works, as numbers: Sunday=0,
-   Monday=1, Tuesday=2 ... Saturday=6. `1,2,3,4,5,6` means "every day
-   except Sunday." Adjust per stylist once you have their real schedule.
+Go to [sheets.google.com](https://sheets.google.com) and create a new
+blank spreadsheet. That's the only manual data-entry step — everything
+else below is copy/paste and clicking buttons.
 
 ### 2. Add the script
 1. In the Sheet, go to **Extensions → Apps Script**. A code editor opens
-   in a new tab.
+   in a new tab (make sure it opened this way — a script created any
+   other way won't be connected to this spreadsheet).
 2. Delete whatever's in the default `Code.gs` file, and paste in the
    entire contents of `google-apps-script/Code.gs` from this folder.
-3. At the top of that Apps Script editor, click **Project Settings**
-   (gear icon on the left) and set the **Time zone** to
-   `(GMT+02:00) Europe/Sofia` — this keeps appointment times correct.
-4. Click **Save** (disk icon).
+3. Click **Save** (disk icon).
+4. In the function dropdown at the top, select **setup**, then click
+   **▷ Run**. The first time, Google will show an "unverified app"
+   warning — click **Advanced → Go to (project name) → Allow** (this is
+   normal for your own private script).
+5. This automatically creates the `Bookings` and `Stylists` tabs with
+   the correct headers and three placeholder stylists (10:00–20:00,
+   every day) — no manual tab renaming or typing required. Safe to run
+   again later; it never overwrites a tab that already exists.
+6. Optional: click **Project Settings** (gear icon, left sidebar) and
+   set **Time zone** to `(GMT+02:00) Europe/Sofia`.
 
 ### 3. Deploy it as a Web App
 1. Click **Deploy → New deployment**.
@@ -77,13 +70,10 @@ gets a reminder email sent to the address the customer typed in.
 
 ## Still to confirm / fill in
 
-- **Real stylist names and hours** — replace `Стилист 1/2/3` in the
-  `Stylists` tab (and in the Stylists section of `index.html`) with real
-  names once you have them.
-- **Opening hours** — currently assumes 09:00–20:00, Mon–Sat, based only
-  on the Google Maps screenshot confirming an 8 PM close. Confirm the
-  actual opening time and Sunday status with Alan, and update both the
-  `Stylists` tab and the hours table in `index.html`.
+- **Real stylist names** — replace `Стилист 1/2/3` in the `Stylists` tab
+  (and in the Stylists section of `index.html`) with real names once you
+  have them. Hours (10:00–20:00, every day) already match Alan's real
+  Google Maps listing.
 - **Real interior photo / logo file** — the hero section is a placeholder
   graphic and the logo is a simple recreated scissors mark, since the
   images pasted in chat aren't saved as files I can use directly. Send
