@@ -2,18 +2,13 @@
  * Alan's Barber House — booking backend.
  *
  * Runs entirely inside a Google Sheet (free, no hosting, no third-party
- * account beyond Google). Two sheet tabs are required:
+ * account beyond Google).
  *
- *   "Stylists" — columns: Name | StartTime (e.g. 09:00) | EndTime (e.g. 20:00) | WorkDays
- *     WorkDays is a comma-separated list of weekday numbers, Sunday=0:
- *     "1,2,3,4,5,6" means Monday through Saturday.
- *
- *   "Bookings" — columns: Timestamp | Name | Email | Service | Stylist | Date | Time | ReminderSent
- *     This sheet is written to automatically — just create the header row.
- *
- * See ../SETUP_BOOKING.md for the exact one-time setup steps
- * (paste this file into Apps Script, deploy as a Web App, add a
- * time-driven trigger for sendReminders).
+ * SETUP: after pasting this file in, run the "setup" function once
+ * (function dropdown at top → setup → Run). It creates the "Bookings"
+ * and "Stylists" tabs automatically with the right headers and three
+ * placeholder stylists — no manual tab renaming or cell-typing needed.
+ * See ../SETUP_BOOKING.md for the full one-time steps.
  */
 
 const TIMEZONE = 'Europe/Sofia';
@@ -50,6 +45,40 @@ function jsonOutput(obj) {
 
 function getStylistsSheet() { return SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Stylists'); }
 function getBookingsSheet() { return SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings'); }
+
+/**
+ * Run this once, manually, after pasting this file in (function dropdown
+ * at top → select "setup" → Run). Creates the Bookings and Stylists tabs
+ * with correct headers and three placeholder stylists (10:00-20:00, every
+ * day) if they don't already exist. Safe to run more than once — it never
+ * overwrites a tab that's already there.
+ */
+function setup() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  let bookings = ss.getSheetByName('Bookings');
+  if (!bookings) {
+    bookings = ss.insertSheet('Bookings');
+    bookings.appendRow(['Timestamp', 'Name', 'Email', 'Service', 'Stylist', 'Date', 'Time', 'ReminderSent']);
+  }
+
+  let stylists = ss.getSheetByName('Stylists');
+  if (!stylists) {
+    stylists = ss.insertSheet('Stylists');
+    stylists.appendRow(['Name', 'StartTime', 'EndTime', 'WorkDays']);
+    stylists.appendRow(['Стилист 1', '10:00', '20:00', '0,1,2,3,4,5,6']);
+    stylists.appendRow(['Стилист 2', '10:00', '20:00', '0,1,2,3,4,5,6']);
+    stylists.appendRow(['Стилист 3', '10:00', '20:00', '0,1,2,3,4,5,6']);
+  }
+
+  // Remove the default empty "Sheet1" tab Google creates automatically, if it's still empty.
+  const defaultSheet = ss.getSheetByName('Sheet1');
+  if (defaultSheet && defaultSheet.getLastRow() === 0) {
+    ss.deleteSheet(defaultSheet);
+  }
+
+  Logger.log('Setup complete: Bookings and Stylists tabs are ready.');
+}
 
 function getStylists() {
   const rows = getStylistsSheet().getDataRange().getValues();
