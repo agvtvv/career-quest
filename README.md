@@ -12,3 +12,4 @@ This repo is served via GitHub Pages from the `main` branch. Once Pages is enabl
 
 - Frontage landing page: the Pages root URL (e.g. `https://<username>.github.io/<repo>/`)
 - Alan's Barber House: same root + `clients/alans-barber-house/`
+
